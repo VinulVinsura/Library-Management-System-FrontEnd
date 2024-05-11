@@ -14,7 +14,7 @@ import { text } from 'stream/consumers';
 export class BookListComponent implements OnInit {
   private http;
   public bookList: any = {};
-  public selectBook: any="";
+  public selectBook: any = '';
 
   constructor(private httpClient: HttpClient) {
     this.http = httpClient;
@@ -28,23 +28,31 @@ export class BookListComponent implements OnInit {
       .get('http://localhost:8080/api/book/getBookList')
       .subscribe((data) => {
         this.bookList = data;
-        this.selectBook="";
+        this.selectBook = '';
       });
   }
 
   public removeBook() {
     this.http
-      .delete('http://localhost:8080/api/book/deletebook/' + this.selectBook.id ,{responseType:"text"})  // We handle response Type
+      .delete(
+        'http://localhost:8080/api/book/deletebook/' + this.selectBook.id,
+        { responseType: 'text' }
+      ) // We handle response Type
       .subscribe((data) => {
         console.log(data);
         this.lodeBookTable();
-       
       });
+  }
 
+  public updataBook() {
+    this.http.post("http://localhost:8080/api/book/addBook",this.selectBook)
+    .subscribe((data)=>{
+      this.lodeBookTable();
+    })
   }
 
   setSelectBook(book: any) {
     this.selectBook = book;
-   
+    console.log(book);
   }
 }
