@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { text } from 'stream/consumers';
 import bootstrap from '../../../main.server';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-book-list',
@@ -46,19 +47,48 @@ export class BookListComponent implements OnInit {
       ) // We handle response Type
       .subscribe((data) => {
         console.log(data);
+        
         this.lodeBookTable();
       });
+  }
+
+  public alet(){
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to remove this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        this.removeBook();
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your Book has been deleted.",
+          icon: "success"
+        });
+      }
+    });
   }
 
   public updataBook() {
     this.http.post("http://localhost:8080/api/book/addBook",this.selectBook)
     .subscribe((data)=>{
+      Swal.fire({
+        title: "Good job..Book updated !",
+        text: "You clicked the button!",
+        icon: "success"
+      });
       this.lodeBookTable();
     })
   }
 
   setSelectBook(book: any) {
     this.selectBook = book;
+    this.alet();
     console.log(book);
   }
 }

@@ -45,49 +45,6 @@
   </table>
 </div>
 
-<!-- Delete Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Do You Want To Delete Book
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          Book_ID : {{ selectBook.id }} <br />
-          Book Title : {{ selectBook.title }}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-          No
-        </button>
-        <button
-          type="button"
-          (click)="removeBook()"
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-        >
-          Yes
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!--Updata Modal-->
 <div
@@ -151,7 +108,7 @@
             <label for="username" class="form-label fw-bold">QTY</label>
             <div class="input-group has-validation">
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="username"
                 placeholder=""
@@ -164,7 +121,7 @@
           <label for="username" class="form-label fw-bold">Price</label>
           <div class="input-group has-validation">
             <input
-              type="text"
+              type="number"
               class="form-control"
               id="username"
               placeholder=""
