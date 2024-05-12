@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { text } from 'stream/consumers';
+import bootstrap from '../../../main.server';
 
 @Component({
   selector: 'app-book-list',
@@ -12,9 +13,12 @@ import { text } from 'stream/consumers';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent implements OnInit {
+  public toastLiveExample = document.getElementById('liveToast')
   private http;
   public bookList: any = {};
   public selectBook: any = '';
+  public toastBootstrap:any;
+  
 
   constructor(private httpClient: HttpClient) {
     this.http = httpClient;
@@ -22,6 +26,8 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.lodeBookTable();
   }
+
+
 
   lodeBookTable() {
     this.http

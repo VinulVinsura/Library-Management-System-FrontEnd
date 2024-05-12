@@ -1,5 +1,4 @@
 <div class="table-responsive small">
-  
   <table class="table table-striped table-sm">
     <thead>
       <tr>
@@ -46,7 +45,7 @@
   </table>
 </div>
 
-<!-- Modal -->
+<!-- Delete Modal -->
 <div
   class="modal fade"
   id="exampleModal"
@@ -90,6 +89,7 @@
   </div>
 </div>
 
+<!--Updata Modal-->
 <div
   class="modal fade"
   id="exampleModal2"
@@ -100,7 +100,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">UPDATA</h1>
         <button
           type="button"
           class="btn-close"
@@ -111,15 +111,15 @@
       <div class="modal-body">
         <div class="row g-3">
           <div class="col-12">
-            <label for="firstName" class="form-label fw-bold ">ISBN</label>
+            <label for="firstName" class="form-label fw-bold">ISBN</label>
             <input
               type="text"
+              disabled
               class="form-control"
               id="firstName"
               placeholder=""
               value=""
               [(ngModel)]="selectBook.isbn"
-
             />
           </div>
 
@@ -161,7 +161,7 @@
           </div>
         </div>
         <div class="col-12">
-          <label for="username" class="form-label fw-bold" >Price</label>
+          <label for="username" class="form-label fw-bold">Price</label>
           <div class="input-group has-validation">
             <input
               type="text"
@@ -175,13 +175,51 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-secondary  "
+            class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
             Close
           </button>
-          <button type="button" (click)="updataBook();" class="btn btn-primary " data-bs-dismiss="modal">Updata</button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#updataConformationModal"
+            class="btn btn-primary"
+          >
+            Updata
+          </button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Updata conformation Modal-->
+
+<div
+  class="modal fade"
+  id="updataConformationModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confromation Update</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">If you want to update "{{selectBook.title}}" this book..</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" (click)="updataBook()" data-bs-dismiss="modal" class="btn btn-primary">Conform Update</button>
       </div>
     </div>
   </div>
