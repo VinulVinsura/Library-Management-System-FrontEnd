@@ -14,12 +14,11 @@ import Swal from 'sweetalert2';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent implements OnInit {
-  public toastLiveExample = document.getElementById('liveToast')
+  public toastLiveExample = document.getElementById('liveToast');
   private http;
   public bookList: any = {};
   public selectBook: any = '';
-  public toastBootstrap:any;
-  
+  public toastBootstrap: any;
 
   constructor(private httpClient: HttpClient) {
     this.http = httpClient;
@@ -27,8 +26,6 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.lodeBookTable();
   }
-
-
 
   lodeBookTable() {
     this.http
@@ -47,48 +44,50 @@ export class BookListComponent implements OnInit {
       ) // We handle response Type
       .subscribe((data) => {
         console.log(data);
-        
+        this.selectBook = '';
+
         this.lodeBookTable();
       });
   }
 
-  public alet(){
+  public deleteConfimationAlet(book: any) {
+    this.selectBook = book;
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to remove this!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: `You won't be able to remove ${this.selectBook.title}`, // ` this simble using string inter collertion in js
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
-      
       if (result.isConfirmed) {
         this.removeBook();
         Swal.fire({
-          title: "Deleted!",
-          text: "Your Book has been deleted.",
-          icon: "success"
+          title: 'Deleted!',
+          text: 'Your  Book has been deleted.',
+          icon: 'success',
         });
       }
     });
   }
 
   public updataBook() {
-    this.http.post("http://localhost:8080/api/book/addBook",this.selectBook)
-    .subscribe((data)=>{
-      Swal.fire({
-        title: "Good job..Book updated !",
-        text: "You clicked the button!",
-        icon: "success"
+    this.http
+      .post('http://localhost:8080/api/book/addBook', this.selectBook)
+      .subscribe((data) => {
+        Swal.fire({
+          title: 'Good job..Book updated !',
+          text: 'You clicked the button!',
+          icon: 'success',
+        });
+        this.selectBook = '';
+        this.lodeBookTable();
       });
-      this.lodeBookTable();
-    })
   }
 
   setSelectBook(book: any) {
     this.selectBook = book;
-    this.alet();
     console.log(book);
   }
 }
