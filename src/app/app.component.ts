@@ -3,13 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./comman/header/header.component";
 import { SideBarComponent } from './comman/side-bar/side-bar.component';
 import { BookListComponent } from './page/book-list/book-list.component';
+import { LoginComponent } from "./page/login/login.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HeaderComponent,SideBarComponent,BookListComponent]
+    imports: [RouterOutlet, HeaderComponent, SideBarComponent, BookListComponent]
 })
 export class AppComponent {
   title = 'library-manage-app';
