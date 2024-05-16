@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
   private http;
-  public contrieList:any=[];
+  public contrieList: any = [];
+  public selectCountry:any
 
   constructor(private httpClient: HttpClient) {
     this.http = httpClient;
@@ -25,8 +26,13 @@ export class SignUpComponent implements OnInit {
   public lodeCountries() {
     let api = 'https://restcountries.com/v3.1/all';
     this.http.get(api).subscribe((data) => {
-      this.contrieList=data;
+      this.contrieList = data;
       console.log(this.contrieList);
     });
+  }
+
+  public setCountry(country:any) {
+    this.selectCountry = country;
+    console.log(this.selectCountry);
   }
 }

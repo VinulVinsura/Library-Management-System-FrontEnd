@@ -14,10 +14,10 @@ import Swal from 'sweetalert2';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent implements OnInit {
-  public toastLiveExample = document.getElementById('liveToast');
+ 
   private http;
   public bookList: any = {};
-  public selectBook: any = '';
+  public selectBook: any="";
   public toastBootstrap: any;
 
   constructor(private httpClient: HttpClient) {
