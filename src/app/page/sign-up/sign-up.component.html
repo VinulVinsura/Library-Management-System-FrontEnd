@@ -39,7 +39,7 @@
               placeholder=""
               value=""
               [(ngModel)]="borrower.firstName"
-              
+
               [ngModelOptions]="{standalone:true}"
             />
             <div class="invalid-feedback">Valid first name is required.</div>
@@ -123,7 +123,7 @@
               class="form-control"
               id="contactNumber"
               placeholder=""
-              [(ngModel)]="selectCountry?.idd.root"
+              [(ngModel)]="selectCountryCode"
               [ngModelOptions]="{standalone:true}"
               [(ngModel)]="borrower.phoneNum"
             />
