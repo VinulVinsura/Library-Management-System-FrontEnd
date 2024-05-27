@@ -5,13 +5,15 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { text } from 'stream/consumers';
 import bootstrap from '../../../main.server';
 import Swal from 'sweetalert2';
+import { HeaderComponent } from "../../comman/header/header.component";
+import { SideBarComponent } from "../../comman/side-bar/side-bar.component";
 
 @Component({
-  selector: 'app-book-list',
-  standalone: true,
-  imports: [HttpClientModule, FormsModule, CommonModule],
-  templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.css',
+    selector: 'app-book-list',
+    standalone: true,
+    templateUrl: './book-list.component.html',
+    styleUrl: './book-list.component.css',
+    imports: [HttpClientModule, FormsModule, CommonModule, HeaderComponent, SideBarComponent]
 })
 export class BookListComponent implements OnInit {
  

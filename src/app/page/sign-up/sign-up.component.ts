@@ -17,11 +17,8 @@ export class SignUpComponent implements OnInit {
   private http;
   public contrieList: any = [];
   public selectCountryCode: any;
-  public isExists:boolean=true;
-  id = 'BR0';
-  i = 0;
+  
   borrower = {
-    borrower_Id: 'dvdd',
     username: null,
     password: null,
     firstName: null,
@@ -60,25 +57,24 @@ export class SignUpComponent implements OnInit {
       .get(
         'http://localhost:8081/api/borrower/isExistsByUserName/' +
           this.borrower.username,
-        { responseType:"text" }
+        { responseType: 'text' }
       )
-      .subscribe((data) => {
-        console.log(data)
-        
-        if (data=="false") {
-          this.borrower.borrower_Id = this.id + ++this.i;
+      .subscribe((data:any) => {
+        console.log(data);
+
+        if (data == 'false') {
+         
           let api = 'http://localhost:8081/api/borrower/addBorrower';
           this.http.post(api, this.borrower).subscribe((data) => {
             console.log(data);
           });
           Swal.fire({
-            title: "Borrower Saved!",
-            text: "You clicked the button!",
-            icon: "success"
+            title: 'Borrower Saved!',
+            text: 'You clicked the button!',
+            icon: 'success',
           });
 
           this.borrower = {
-            borrower_Id: '',
             username: null,
             password: null,
             firstName: null,
@@ -90,10 +86,10 @@ export class SignUpComponent implements OnInit {
           };
         } else {
           Swal.fire({
-            icon: "error",
+            icon: 'error',
             title: "Can't Save Borrower..",
-            text: "Something went wrong!",
-            footer: '<a href="#">Why do I have this issue?</a>'
+            text: 'Something went wrong!',
+            footer: '<a href="#">Why do I have this issue?</a>',
           });
         }
       });

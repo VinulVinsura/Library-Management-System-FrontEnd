@@ -5,10 +5,12 @@ import { LoginComponent } from './page/login/login.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
 
 export const routes: Routes = [
+   
     {
         path:"",
         component:HomeComponent
-    },
+       
+     },
     {
         path:"bookList",
         component:BookListComponent
@@ -20,5 +22,6 @@ export const routes: Routes = [
     {
         path:"signUp",
         component:SignUpComponent
-    }
+    },
+   
 ];
