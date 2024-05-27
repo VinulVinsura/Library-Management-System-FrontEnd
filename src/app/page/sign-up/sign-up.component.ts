@@ -62,7 +62,7 @@ export class SignUpComponent implements OnInit {
       .subscribe((data: any) => {
         if (data == 'false') {
           Swal.fire({
-            title: 'Do you want to Save..!  ?',
+            title: 'Do you want to Save.!  ?',
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'Save',
