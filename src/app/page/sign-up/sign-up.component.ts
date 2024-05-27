@@ -87,7 +87,7 @@ export class SignUpComponent implements OnInit {
                 phoneNum: null,
               };
             } else if (result.isDenied) {
-              Swal.fire('Changes are not saved', '', 'info');
+              Swal.fire('Changes are not Saved', '', 'info');
             }
           });
         } else {
