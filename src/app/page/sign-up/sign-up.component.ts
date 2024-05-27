@@ -17,7 +17,7 @@ export class SignUpComponent implements OnInit {
   private http;
   public contrieList: any = [];
   public selectCountryCode: any;
-  
+
   borrower = {
     username: null,
     password: null,
@@ -59,36 +59,42 @@ export class SignUpComponent implements OnInit {
           this.borrower.username,
         { responseType: 'text' }
       )
-      .subscribe((data:any) => {
-        console.log(data);
-
+      .subscribe((data: any) => {
         if (data == 'false') {
-         
-          let api = 'http://localhost:8081/api/borrower/addBorrower';
-          this.http.post(api, this.borrower).subscribe((data) => {
-            console.log(data);
-          });
           Swal.fire({
-            title: 'Borrower Saved!',
-            text: 'You clicked the button!',
-            icon: 'success',
-          });
+            title: 'Do you want to Save  ?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire('Borrower Saved!', '', 'success');
+              let api = 'http://localhost:8081/api/borrower/addBorrower';
+              this.http.post(api, this.borrower).subscribe((data) => {
+                console.log(data);
+              });
 
-          this.borrower = {
-            username: null,
-            password: null,
-            firstName: null,
-            lastName: null,
-            email: null,
-            address: null,
-            country: null,
-            phoneNum: null,
-          };
+              this.borrower = {
+                username: null,
+                password: null,
+                firstName: null,
+                lastName: null,
+                email: null,
+                address: null,
+                country: null,
+                phoneNum: null,
+              };
+            } else if (result.isDenied) {
+              Swal.fire('Changes are not saved', '', 'info');
+            }
+          });
         } else {
           Swal.fire({
             icon: 'error',
             title: "Can't Save Borrower..",
-            text: 'Something went wrong!',
+            text: 'Already Saved this Username!',
             footer: '<a href="#">Why do I have this issue?</a>',
           });
         }
