@@ -27,6 +27,9 @@ export const routes: Routes = [
     {
         path:"borrowerList",
         component:BorrowerListComponent
-    }
+    },
+    
+    
+
    
 ];
