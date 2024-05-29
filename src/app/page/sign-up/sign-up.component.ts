@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { StringDecoder } from 'node:string_decoder';
 import { text } from 'stream/consumers';
 import Swal from 'sweetalert2';
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, CommonModule],
+  imports: [HttpClientModule, FormsModule, CommonModule,RouterLink],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })

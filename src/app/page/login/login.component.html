@@ -1,4 +1,4 @@
-<div class="row mt-5">
+<div class="row m-lg-5 m-md-5">
   <div class="col-4"></div>
 
   <div class="col-5 text-center">
@@ -11,8 +11,10 @@
           class="form-control"
           id="floatingInput"
           placeholder="name@example.com"
+          [(ngModel)]="loginObj.email"
+          [ngModelOptions]="{standalone:true}"
         />
-        <label for="floatingInput">User name</label>
+        <label for="floatingInput">Email</label>
       </div>
       <br />
       <div class="form-floating">
@@ -21,6 +23,9 @@
           class="form-control"
           id="floatingPassword"
           placeholder="Password"
+          [(ngModel)]="loginObj.password"
+          [ngModelOptions]="{standalone:true}"
+          
         />
         <label for="floatingPassword">Password</label>
       </div>
@@ -31,13 +36,17 @@
           type="checkbox"
           value="remember-me"
           id="flexCheckDefault"
+         
         />
         <label class="form-check-label" for="flexCheckDefault">
           Remember me
         </label>
       </div>
-      <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 202O–2024</p>
+      <button class="btn btn-primary w-100 py-2" type="submit" (click)="login()">Sign in</button>
+      <br>
+      <br>
+      <button class="btn btn-outline-primary text-black w-100 py-2" type="submit" [routerLink]="['/signUp']" >Sign Up</button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; 2024-2028</p>
     </form>
   </div>
 </div>
