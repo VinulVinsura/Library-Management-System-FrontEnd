@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink,Router } from '@angular/router';
+
 import { StringDecoder } from 'node:string_decoder';
 import { text } from 'stream/consumers';
 import Swal from 'sweetalert2';
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent implements OnInit {
-  private http;
+
   public contrieList: any = [];
   public selectCountryCode: any;
 
@@ -30,9 +31,7 @@ export class SignUpComponent implements OnInit {
     phoneNum: null,
   };
 
-  constructor(private httpClient: HttpClient) {
-    this.http = httpClient;
-  }
+  constructor(private http:HttpClient,private router:Router) {}
 
   ngOnInit(): void {
     this.lodeCountries();
@@ -40,7 +39,7 @@ export class SignUpComponent implements OnInit {
 
   public lodeCountries() {
     let api = 'https://restcountries.com/v3.1/all';
-
+   
     this.http.get(api).subscribe((data) => {
       this.contrieList = data;
       console.log(this.contrieList);
@@ -54,6 +53,7 @@ export class SignUpComponent implements OnInit {
   }
 
   public registerBorrower() {
+    
     this.http
       .get(
         'http://localhost:8081/api/borrower/isExistsByUserName/' +
@@ -75,8 +75,9 @@ export class SignUpComponent implements OnInit {
               let api = 'http://localhost:8081/api/borrower/addBorrower';
               this.http.post(api, this.borrower).subscribe((data) => {
                 console.log(data);
+                
               });
-
+              
               this.borrower = {
                 username: null,
                 password: null,
@@ -87,6 +88,8 @@ export class SignUpComponent implements OnInit {
                 country: null,
                 phoneNum: null,
               };
+              
+             
             } else if (result.isDenied) {
               Swal.fire('Changes are not Saved', '', 'info');
             }

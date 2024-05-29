@@ -31,8 +31,10 @@ export class BorrowerListComponent implements OnInit {
   }
 
   deleteBorrower(borrower:any){
-    this.http.delete(this.basePath+"/deleteBorrower/"+borrower.id).subscribe((data)=>{
+    console.log(borrower.username);
+    this.http.delete("http://localhost:8081/api/borrower/deleteBorrower/"+borrower.username).subscribe((data)=>{
       console.log(data);
+      console.log("vinul")
       this.lodeBorrowerTable();
     })
   }

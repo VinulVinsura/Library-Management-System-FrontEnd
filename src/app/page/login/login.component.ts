@@ -3,7 +3,7 @@ import { HeaderComponent } from '../../comman/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent {
   this.http.post("http://localhost:8081/api/login/isValidUser",this.loginObj).subscribe((data:any)=>{
     console.log(this.loginObj);
     if(data==true){
-      this.router.navigate(['/borrowerList']);
+      this.router.navigate(['/home']);
     }
   })
  }

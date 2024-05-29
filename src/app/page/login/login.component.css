@@ -1,0 +1,18 @@
+.container{
+    background-image: url("/assets/img/10.webp");
+    height: 100vh !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    position:relative !important;
+}
+
+.w-99{
+    border: 3px solid black !important;
+    border-radius: 10px !important;
+    
+}
+
+

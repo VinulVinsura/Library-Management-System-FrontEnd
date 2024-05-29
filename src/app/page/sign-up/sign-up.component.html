@@ -133,9 +133,13 @@
 
         <hr class="my-4" />
 
-        <button class="w-100 btn btn-primary btn-lg" type="submit" (click)="registerBorrower()">
-           Submit
-        </button>
+        <div><button class="w-100 btn btn-primary btn-lg" type="submit" (click)="registerBorrower()">
+          Submit
+       </button></div>
+ <br>
+        <div><button class="w-100 btn btn-secondary btn-lg" type="shadow" [routerLink]="['/login']">
+          Sign In
+       </button></div>
       </form>
     </div>
   </div>

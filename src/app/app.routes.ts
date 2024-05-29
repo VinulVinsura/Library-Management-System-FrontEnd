@@ -8,7 +8,7 @@ import { BorrowerListComponent } from './page/borrower-list/borrower-list.compon
 export const routes: Routes = [
    
     {
-        path:"",
+        path:"home",
         component:HomeComponent
        
      },
@@ -28,6 +28,11 @@ export const routes: Routes = [
         path:"borrowerList",
         component:BorrowerListComponent
     },
+    {
+        path:"",
+        redirectTo:"login",
+        pathMatch:"full"
+    }
     
     
 
