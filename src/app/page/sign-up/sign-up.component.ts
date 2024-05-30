@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
               Swal.fire('Borrower Saved!', '', 'success');
               let api = 'http://localhost:8081/api/borrower/addBorrower';
               this.http.post(api, this.borrower).subscribe((data) => {
-                console.log(data);
+              
                 
               });
               

@@ -1,0 +1,10 @@
+.container{
+    background-image: url("/assets/img/12.avif");
+    height: 70pc !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    position:relative !important;
+}
