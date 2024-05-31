@@ -1,61 +1,64 @@
-
 <div class="row">
   <app-header></app-header>
 </div>
-<div class="container ">
+<div class="container">
   <div class="row">
     <div class="col-4">
       <br />
       <app-side-bar></app-side-bar>
     </div>
     <div class="col-8">
-      <br>
+      <br />
       <div class="table-responsive small">
-        <table class="table table-striped table-sm">
-          <thead *ngIf="bookList.length>0">
-            <tr>
-              <th scope="col" class="text-center">No</th>
-              <th scope="col" class="text-center">ISBN</th>
-              <th scope="col" class="text-center">Title</th>
-              <th scope="col" class="text-center">Category</th>
-              <th scope="col" class="text-center">QTY</th>
-              <th scope="col" class="text-center">Price</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let book of bookList; let i = index">
-              <td class="text-center">#BN{{ i + 1 }}</td>
-              <td class="text-center">{{ book.isbn }}</td>
-              <td class="text-center">{{ book.title }}</td>
-              <td class="text-center">{{ book.category }}</td>
-              <td class="text-center">{{ book.qty }}</td>
-              <td class="text-center">{{ book.price }}</td>
-              <td>
-                <button
-                  type="button"
-                  (click)="deleteConfimationAlet(book)"
-                  class="btn btn-outline-danger mx-3"
-                >
-                  <i class="bi bi-trash3-fill"></i>
-                </button>
-      
-                <button
-                  data-bs-toggle="modal"
-                  data-bs-target="#updateModal2"
-                  type="button"
-                  (click)="setSelectBook(book)"
-                  class="btn btn-outline-primary"
-                >
-                  <i class="bi bi-pencil-square"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div
+          class="card "
+          style="width: 50rem"
+          style="height: 15rem"
+       
+          *ngFor="let book of bookList"
+        >
+          <div class="card-body">
+           
+              <h4 class="card-title">{{ book.isbn }} - {{ book.title }}</h4>
+              <br />
+              <p class="card-text">
+                Category : {{ book.category }}
+                <br />
+                Price : {{ book.price }}
+                <br />
+                QTY : {{ book.qty }}
+              </p>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger"
+                        (click)="deleteConfimationAlet(book)"
+                      >
+                        <i class="bi bi-trash3-fill"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary"
+                        (click)="setSelectBook(book)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#updateModal2"
+                      >
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            
+          </div>
+        </div>
       </div>
-      
-      
+
       <!--Updata Modal-->
       <div
         class="modal fade"
@@ -89,7 +92,7 @@
                     [(ngModel)]="selectBook.isbn"
                   />
                 </div>
-      
+
                 <div class="col-12">
                   <label for="lastName" class="form-label fw-bold">Title</label>
                   <input
@@ -101,9 +104,11 @@
                     [(ngModel)]="selectBook.title"
                   />
                 </div>
-      
+
                 <div class="col-12">
-                  <label for="username" class="form-label fw-bold">Category</label>
+                  <label for="username" class="form-label fw-bold"
+                    >Category</label
+                  >
                   <div class="input-group has-validation">
                     <input
                       type="text"
@@ -160,9 +165,9 @@
           </div>
         </div>
       </div>
-      
+
       <!--Updata conformation Modal-->
-      
+
       <div
         class="modal fade"
         id="updataConformationModal"
@@ -173,7 +178,9 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Confromation Update</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Confromation Update
+              </h1>
               <button
                 type="button"
                 class="btn-close"
@@ -181,21 +188,29 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">If you want to update "{{selectBook.title}}" this book..</div>
+            <div class="modal-body">
+              If you want to update "{{ selectBook.title }}" this book..
+            </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
                 Close
               </button>
-              <button type="button" (click)="updataBook()" data-bs-dismiss="modal" class="btn btn-primary">Conform Update</button>
+              <button
+                type="button"
+                (click)="updataBook()"
+                data-bs-dismiss="modal"
+                class="btn btn-primary"
+              >
+                Conform Update
+              </button>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 </div>
-
-
-
-

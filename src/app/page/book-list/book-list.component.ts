@@ -7,6 +7,7 @@ import bootstrap from '../../../main.server';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from "../../comman/header/header.component";
 import { SideBarComponent } from "../../comman/side-bar/side-bar.component";
+import { log } from 'console';
 
 @Component({
     selector: 'app-book-list',
@@ -18,7 +19,7 @@ import { SideBarComponent } from "../../comman/side-bar/side-bar.component";
 export class BookListComponent implements OnInit {
  
   private http;
-  public bookList: any = {};
+  public bookList: any =[];
   public selectBook: any="";
   public toastBootstrap: any;
 
@@ -34,6 +35,7 @@ export class BookListComponent implements OnInit {
       .get('http://localhost:8080/api/book/getBookList')
       .subscribe((data) => {
         this.bookList = data;
+        console.log(this.bookList);
         this.selectBook = '';
       });
   }
@@ -56,7 +58,7 @@ export class BookListComponent implements OnInit {
     this.selectBook = book;
     Swal.fire({
       title: 'Are you sure?',
-      text: `You won't be able to remove ${this.selectBook.title}`, // ` this simble using string inter collertion in js
+      text: `You won't be able to remove "${this.selectBook.title}"`, // ` this simble using string inter collertion in js
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

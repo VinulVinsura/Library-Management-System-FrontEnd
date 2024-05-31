@@ -1,0 +1,88 @@
+<div class="row">
+  <app-header></app-header>
+</div>
+
+<div class="container">
+  <br /><br />
+  <form class="needs-validation shadow p-5 w-99 mx-auto py-5">
+    <div class="row">
+      <div class="col-6">
+        <div class="input-group has-validation">
+          <span class="input-group-text text-black">ISBN</span>
+          <input
+            type="text"
+            class="form-control"
+            id="isbn"
+            placeholder="isbn"
+            [(ngModel)]="book.isbn"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <div class="invalid-feedback">Book ISBN is required.</div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <br />
+        <label for="title" class="form-label text-white"> Title </label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          placeholder="title"
+          [(ngModel)]="book.title"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <div class="invalid-feedback">Book title is required.</div>
+      </div>
+
+      <div class="col-6">
+        <br />
+        <label for="address" class="form-label text-white"> Category</label>
+        <select class="form-select" aria-label="Default select example"  [(ngModel)]="book.category" [ngModelOptions]="{ standalone: true }">
+          <option selected>Open this select menu</option>
+          <option value="Romance">Romance</option>
+          <option value="Horror">Horror</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Historical fiction">Historical fiction</option>
+          <option value="Scince fiction">Scince fiction</option>
+          <option value="Kids">Kids</option>
+        </select>
+        <div class="invalid-feedback">Book category is required.</div>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <br />
+          <label for="price" class="form-label text-white"> Price </label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            placeholder="100$"
+            [(ngModel)]="book.price"
+            [ngModelOptions]="{ standalone: true }"
+            
+          />
+        </div>
+
+        <div class="col-4">
+          <br />
+          <label for="qty" class="form-label text-white"> QTY </label>
+          <input
+            type="number"
+            class="form-control"
+            id="qty"
+            placeholder="qty"
+            [(ngModel)]="book.qty"
+           [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </div>
+    <br>
+    <button class="btn btn-success " type="submit" (click)="addBook()">
+      Submit
+    </button>
+  </form>
+</div>
