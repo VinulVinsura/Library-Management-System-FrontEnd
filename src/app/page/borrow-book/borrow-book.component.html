@@ -9,29 +9,28 @@
           
                 <div class="container-fluid">
                   <form class="d-flex " role="search">
-                    <input class="form-control me-2" type="search" placeholder=" Search User" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search </button>
+                    <input class="form-control me-2" type="search" placeholder=" Search User" aria-label="Search" [(ngModel)]="userName" [ngModelOptions]="{ standalone: true }">
+                    <button class="btn btn-outline-success" type="submit" (click)="searchUser()">Search </button>
                   </form>
                 </div>
               
         </div>
         <div class="col-1"></div>
         <div class="col-4">
-            <div class="card" style="width: 25rem;">
+            <div class="card" style="width: 25rem;" *ngIf="userDatils">
                <img src="assets/img/14.jpg" class="card-img-top"  height="350rem" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"><b>User Details</b></h5>
                   
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Email : </li>
-                  <li class="list-group-item">Address : </li>
-                  <li class="list-group-item">Country : </li>
-                  <li class="list-group-item">Phone Number : </li>
+                  <li class="list-group-item">Email : {{userDatils.email}} </li>
+                  <li class="list-group-item">Address : {{userDatils.address}} </li>
+                  <li class="list-group-item">Country : {{userDatils.country}} </li>
+                  <li class="list-group-item">Phone Number : {{userDatils.phoneNum}}  </li>
                 </ul>
                 <div class="card-body">
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  
                 </div>
               </div>
         </div>
