@@ -5,6 +5,7 @@ import { LoginComponent } from './page/login/login.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
 import { BorrowerListComponent } from './page/borrower-list/borrower-list.component';
 import { AddBookComponent } from './page/add-book/add-book.component';
+import { BorrowBookComponent } from './page/borrow-book/borrow-book.component';
 
 export const routes: Routes = [
    
@@ -37,7 +38,12 @@ export const routes: Routes = [
     {
         path:"addBook",
         component:AddBookComponent
+    },
+    {
+        path:"borrowBook",
+        component:BorrowBookComponent
     }
+
     
     
 
