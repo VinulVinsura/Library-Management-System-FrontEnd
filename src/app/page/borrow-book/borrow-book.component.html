@@ -1,38 +1,103 @@
 <div class="row">
-    <app-header></app-header>
+  <app-header></app-header>
 </div>
 
 <div class="container">
-    <br>
-    <div class="row">
-        <div class="col-6">
-          
-                <div class="container-fluid">
-                  <form class="d-flex " role="search">
-                    <input class="form-control me-2" type="search" placeholder=" Search User" aria-label="Search" [(ngModel)]="userName" [ngModelOptions]="{ standalone: true }">
-                    <button class="btn btn-outline-success" type="submit" (click)="searchUser()">Search </button>
-                  </form>
-                </div>
-              
-        </div>
-        <div class="col-1"></div>
-        <div class="col-4">
-            <div class="card" style="width: 25rem;" *ngIf="userDatils">
-               <img src="assets/img/14.jpg" class="card-img-top"  height="350rem" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title"><b>User Details</b></h5>
-                  
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Email : {{userDatils.email}} </li>
-                  <li class="list-group-item">Address : {{userDatils.address}} </li>
-                  <li class="list-group-item">Country : {{userDatils.country}} </li>
-                  <li class="list-group-item">Phone Number : {{userDatils.phoneNum}}  </li>
-                </ul>
-                <div class="card-body">
-                  
-                </div>
-              </div>
-        </div>
+  <br />
+  <div class="row">
+    <div class="col-6">
+      <div class="container-fluid">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder=" Search User"
+            aria-label="Search"
+            [(ngModel)]="userName"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <button
+            class="btn btn-outline-success"
+            type="submit"
+            (click)="searchUser()"
+          >
+            Search
+          </button>
+        </form>
+      </div>
     </div>
+    <div class="col-6">
+        <div class="container-fluid" *ngIf="userDatils">
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="text"
+                placeholder=" Enter Book ID"
+                aria-label="Search"
+                [(ngModel)]="bookId"
+                [ngModelOptions]="{ standalone: true }"
+                
+              />
+              <button
+                class="btn btn-outline-primary"
+                type="submit"
+                (click)="searchBook()"
+              >
+                Search
+              </button>
+            </form>
+        </div>
+         <br><br><br>
+        <table class="table table-bordered table-primary" *ngIf="confirmObj">
+            <thead>
+              <tr>
+                <th scope="col">#NO</th>
+                <th scope="col">ID</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of selectBookList; let i=index">
+                <td>{{i+1}}</td>
+                <th>{{book.id}}</th>
+                <td>{{book.isbn}}</td>
+                <td>{{book.title}}</td>
+                <td>{{book.price}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+        
+          
+        
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <br /><br />
+    <div class="col-6">
+      <div class="card" style="width: 25rem" *ngIf="userDatils">
+        <img
+          src="assets/img/14.jpg"
+          class="card-img-top"
+          height="350rem"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title"><b>User Details</b></h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Email :</b>  {{ userDatils.email }}</li>
+          <li class="list-group-item"><b>Address :</b> {{ userDatils.address }}</li>
+          <li class="list-group-item"><b>Country :</b> {{ userDatils.country }}</li>
+          <li class="list-group-item">
+            <b>Phone Number :</b>  {{ userDatils.phoneNum }}
+          </li>
+        </ul>
+        <div class="card-body"></div>
+      </div>
+    </div>
+  </div>
 </div>
