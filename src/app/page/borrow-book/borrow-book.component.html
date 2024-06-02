@@ -28,7 +28,7 @@
     </div>
     <div class="col-6">
       <div class="container-fluid" *ngIf="userDatils">
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" >
           <input
             class="form-control me-2"
             type="text"
@@ -36,8 +36,11 @@
             aria-label="Search"
             [(ngModel)]="bookId"
             [ngModelOptions]="{ standalone: true }"
+            *ngIf="!confirmObj"
+            
           />
           <button
+          *ngIf="!confirmObj"
             class="btn btn-outline-primary"
             type="submit"
             (click)="searchBook()"
@@ -46,34 +49,12 @@
           </button>
         </form>
       </div>
-      <br /><br /><br />
-      <table class="table table-bordered table-primary" *ngIf="confirmObj">
-        <thead>
-          <tr>
-            <th scope="col">#NO</th>
-            <th scope="col">ID</th>
-            <th scope="col">ISBN</th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let book of selectBookList; let i = index">
-            <td>{{ i + 1 }}</td>
-            <th>{{ book.id }}</th>
-            <td>{{ book.isbn }}</td>
-            <td>{{ book.title }}</td>
-            <td>{{ book.price }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button (click)="getBorrowDetails()" class="btn btn-secondary" *ngIf="confirmObj"> <i class="bi bi-cart3"></i> Borrow Book</button>
     </div>
   </div>
-  <br /><br />
+
   <div class="row">
-    <br /><br />
     <div class="col-6">
+      <br /><br />
       <div class="card" style="width: 25rem" *ngIf="userDatils">
         <img
           src="assets/img/14.jpg"
@@ -96,8 +77,36 @@
             <b>Phone Number :</b> {{ userDatils.phoneNum }}
           </li>
         </ul>
-        <div class="card-body"></div>
       </div>
+    </div>
+    <div class="col-6">
+      <br /><br />
+      <div class="card " style="width: 25rem" style="height: 25rem"  *ngIf="confirmObj" >
+        <div class="card-body">
+            <br>
+          <h3 class="card-title text-center text-success"><b>Your Item </b></h3>
+          <br>
+          <h5 class="card-subtitle mb-2 text-body-emphasis"><b>{{book.isbn}} - {{book.title}}</b></h5>
+          <br>
+          <h5 class="card-subtitle mb-2 text-body-emphasis">Category : <b>{{book.category}}</b></h5>
+          <br>
+          <h5 class="card-subtitle mb-2 text-body-emphasis">Price : <b>{{book.price}}</b></h5>
+          <br>
+          <p class="card-text">
+            Dear Customer you can Borrow only one Book..! <br>
+            Thanks... Come Back !
+          </p>
+         
+        </div>
+      </div>
+      <br />
+      <button
+        (click)="getBorrowDetails()"
+        class="btn btn-secondary"
+        *ngIf="confirmObj"
+      >
+        <i class="bi bi-cart3"></i> Borrow Book
+      </button>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-borrow-book',
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
   imports: [HeaderComponent, HttpClientModule, FormsModule, CommonModule],
 })
 export class BorrowBookComponent {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route:Router) {}
 
   public userName: any;
   public userDatils: any = '';
@@ -21,8 +22,17 @@ export class BorrowBookComponent {
   public selectBookList: any = [];
   public book: any;
   public confirmObj: any;
-  public lodeBookID:any=[];
-  public lodeBookISBN:any=[]
+  public bookIDList:any=[];
+  public bookISBNList:any=[]
+
+  borrowDetails:any={
+     userId:"",
+     booksId:[],
+     booksIsbn:[],
+     userEmail:"",
+     userPhoneNum:"",
+     date:""
+  }
 
   searchUser() {
     console.log(this.userName);
@@ -46,8 +56,8 @@ export class BorrowBookComponent {
           title: `Do you want to "${this.book.title}" Book ?`,
           showDenyButton: true,
           showCancelButton: true,
-          confirmButtonText: 'Save',
-          denyButtonText: `Don't save`,
+          confirmButtonText: 'Yes',
+          denyButtonText: `No`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
@@ -64,8 +74,8 @@ export class BorrowBookComponent {
 
   lodeBookIdAndISBN(){
     this.selectBookList.forEach((element:any) => {
-      this.lodeBookID.push(element.id)
-      this.lodeBookISBN.push(element.isbn)
+      this.bookIDList.push(element.id)
+      this.bookISBNList.push(element.isbn)
     });
   }
 
@@ -73,14 +83,35 @@ export class BorrowBookComponent {
 
    getBorrowDetails(){
       this.lodeBookIdAndISBN()
-       const borrowDetails:any={
-           userId:this.userDatils.id,
-           bookId:this.lodeBookID,
-           bookIsbn:this.lodeBookISBN,
-           userEmail:this.userDatils.email,
-           userNum:this.userDatils.phoneNum,
-         }
-         console.log(borrowDetails);
+      this.borrowDetails={
+        userId:this.userDatils.id,
+        booksId:this.book.id,
+        booksIsbn:this.book.isbn,
+        userEmail:this.userDatils.email,
+        userPhoneNum:this.userDatils.phoneNum,
+        date:new Date
+
+      }
+      Swal.fire({
+        title: `Do you want to get "${this.book.title}" Book ?`,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.http.post("http://localhost:8082/api/transaction/add-transaction", this.borrowDetails).subscribe((data)=>{
+                     console.log("vinul")
+         })
+          Swal.fire('Success !', '', 'success');
+          this.route.navigate(['/home'])
+        } else if (result.isDenied) {
+          Swal.fire('Not Added !', '', 'info');
+        }
+      });
+
+         
      
 
    }
