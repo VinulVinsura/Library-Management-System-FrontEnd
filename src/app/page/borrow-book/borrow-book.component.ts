@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   imports: [HeaderComponent, HttpClientModule, FormsModule, CommonModule],
 })
 export class BorrowBookComponent {
-  constructor(private http: HttpClient, private route:Router) {}
+  constructor(private http: HttpClient, private route: Router) {}
 
   public userName: any;
   public userDatils: any = '';
@@ -22,17 +22,25 @@ export class BorrowBookComponent {
   public selectBookList: any = [];
   public book: any;
   public confirmObj: any;
-  public bookIDList:any=[];
-  public bookISBNList:any=[]
+  public bookIDList: any = [];
+  public bookISBNList: any = [];
+  updateBook: any = {
+    id: '',
+    isbn: '',
+    title: '',
+    category: '',
+    price: '',
+    qty: null,
+  };
 
-  borrowDetails:any={
-     userId:"",
-     booksId:[],
-     booksIsbn:[],
-     userEmail:"",
-     userPhoneNum:"",
-     date:""
-  }
+  borrowDetails: any = {
+    userId: '',
+    booksId: [],
+    booksIsbn: [],
+    userEmail: '',
+    userPhoneNum: '',
+    date: '',
+  };
 
   searchUser() {
     console.log(this.userName);
@@ -52,70 +60,64 @@ export class BorrowBookComponent {
       .get(`http://localhost:8080/api/book/search/${this.bookId}`)
       .subscribe((res) => {
         this.book = res;
-        Swal.fire({
-          title: `Do you want to "${this.book.title}" Book ?`,
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-          denyButtonText: `No`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            this.selectBookList.push(res);
-            this.confirmObj = res;
-            console.log(this.selectBookList);
-            Swal.fire('Add to card !', '', 'success');
-          } else if (result.isDenied) {
-            Swal.fire('Not Added !', '', 'info');
-          }
-        });
+        this.confirmObj = res;
       });
   }
 
-  lodeBookIdAndISBN(){
-    this.selectBookList.forEach((element:any) => {
-      this.bookIDList.push(element.id)
-      this.bookISBNList.push(element.isbn)
+  lodeBookIdAndISBN() {
+    this.selectBookList.forEach((element: any) => {
+      this.bookIDList.push(element.id);
+      this.bookISBNList.push(element.isbn);
     });
   }
 
+  getBorrowDetails() {
+    this.lodeBookIdAndISBN();
+    this.borrowDetails = {
+      userId: this.userDatils.id,
+      booksId: this.book.id,
+      booksIsbn: this.book.isbn,
+      userEmail: this.userDatils.email,
+      userPhoneNum: this.userDatils.phoneNum,
+      date: new Date(),
+    };
+    Swal.fire({
+      title: `Do you want to get "${this.book.title}" Book ?`,
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.http
+          .post(
+            'http://localhost:8082/api/transaction/add-transaction',
+            this.borrowDetails
+          )
+          .subscribe((data) => {
+            console.log('vinul');
+          });
+        Swal.fire('Success !', '', 'success');
+        this.updateBook = {
+          id: this.book.id,
+          isbn: this.book.isbn,
+          title: this.book.title,
+          category: this.book.category,
+          price: this.book.price,
+          qty: this.book.qty - 1,
+        };
+        console.log(this.updateBook);
+        this.http
+          .post('http://localhost:8080/api/book/addBook', this.updateBook)
+          .subscribe((res2) => {
+            console.log(res2);
+          });
 
-
-   getBorrowDetails(){
-      this.lodeBookIdAndISBN()
-      this.borrowDetails={
-        userId:this.userDatils.id,
-        booksId:this.book.id,
-        booksIsbn:this.book.isbn,
-        userEmail:this.userDatils.email,
-        userPhoneNum:this.userDatils.phoneNum,
-        date:new Date
-        
-
+        this.route.navigate(['/home']);
+      } else if (result.isDenied) {
+        Swal.fire('Not Added !', '', 'info');
       }
-      Swal.fire({
-        title: `Do you want to get "${this.book.title}" Book ?`,
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: `No`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          this.http.post("http://localhost:8082/api/transaction/add-transaction", this.borrowDetails).subscribe((data)=>{
-                     console.log("vinul")
-         })
-          Swal.fire('Success !', '', 'success');
-          this.route.navigate(['/home'])
-        } else if (result.isDenied) {
-          Swal.fire('Not Added !', '', 'info');
-        }
-      });
-
-         
-     
-
-   }
-
-  
+    });
+  }
 }
